@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+add
+<br/>
+{{ confirm }}
+<br/>
+<br/>
+<form action="addnews" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="nid" value="<?php random ?>">
+    <label>Title:</label>
+    <input type="text" name="title">
+    <br/> <br/>
+    <label>Date:</label>
+    <input type="text" name="date">
+    <br/> <br/>
+    <label>Image:</label>
+    <input type="text" name="image">
+    <br/> <br/>
+    <label>Short News</label>
+    <input type="text" name="shortNews">
+    <br/> <br/>
+    <label>Long News</label>
+    <input type="textarea" name="longNews">
+    <br/> <br/>
+    <input type="submit"/>
+    <button type="submit">submit</button>
+</form>
+<a href="admin/1/">
+    <button>Back to admin page</button>
+</a>
+</body>
+</html>
