@@ -20,17 +20,18 @@ class AddNews implements ControllerInterface
     public function handle()
     {
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+            $nid = null;
             $title = $_REQUEST['title'];
-            $image = $_REQUEST['image'];
+            $created = $_REQUEST['date'];
+            $image = $_FILES['image'];
+            $filename = '/assets/img/' . md5((string)time()) . '.jpg';
+            move_uploaded_file($image['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $filename);
             $shortNews = $_REQUEST['shortNews'];
             $longNews = $_REQUEST['longNews'];
 
-            $output = $this->dbService->addNews($title, $image, $shortNews, $longNews);
+            $output = $this->dbService->addNews($title, $created, $filename, $shortNews, $longNews);
         }
 
-        $viewVariable = [
-            'msg' => $output
-        ];
-        return $this->templateRenderer->render('addNews.html', $viewVariable);
+        return $this->templateRenderer->render('addNews.html');
     }
 }

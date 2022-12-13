@@ -20,8 +20,13 @@ class Admin implements ControllerInterface
     public function handle()
     {
         $output = $this->dbService->allNews();
-        $viewVariable = $output;
 
-        return $this->templateRenderer->render('admin.php', $viewVariable);
+//        if ($_SERVER['REQUEST_URI'] !== '/admin') {
+//            $msg = $_GET['msg'];
+//            $output = $msg;
+//        }
+
+
+        return $this->templateRenderer->render('admin.php', $output);
     }
 }

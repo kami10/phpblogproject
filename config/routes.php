@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\AddComment;
 use App\Controller\AddNews;
 use App\Controller\Admin;
 use App\Controller\ConfirmComment;
@@ -20,12 +21,13 @@ return [
             Admin::class
         ],
         'login' => Login::class,
-        'fullnews'=> FullNews::class,
-        'addnews'=> AddNews::class,
-        'newcomments'=> NewComments::class,
-        'deletecomment'=> DeleteComment::class,
-        'confirmcomment'=> ConfirmComment::class,
-        'deletenews'=> DeleteNews::class,
-        'editnews'=> EditNews::class,
+        'fullnews' => FullNews::class,
+        'addnews' => AddNews::class,
+        'newcomments' => NewComments::class,
+        'deletecomment' => DeleteComment::class,
+        'confirmcomment' => ConfirmComment::class,
+        'deletenews' => DeleteNews::class,
+        'editnews' => EditNews::class,
+        'addcomment' => AddComment::class,
     ]
 ];

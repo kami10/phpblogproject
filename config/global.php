@@ -1,5 +1,7 @@
 <?php
 
+use App\Controller\AddComment;
+use App\Controller\AddCommentFactory;
 use App\Controller\AddNews;
 use App\Controller\AddNewsFactory;
 use App\Controller\Admin;
@@ -9,8 +11,9 @@ use App\Controller\ConfirmCommentFactory;
 use App\Controller\DeleteComment;
 use App\Controller\DeleteCommentFactory;
 use App\Controller\DeleteNews;
+use App\Controller\DeleteNewsFactory;
 use App\Controller\EditNews;
-use App\Controller\EditNewsController;
+use App\Controller\EditNewsFactory;
 use App\Controller\FullNews;
 use App\Controller\FullNewsController;
 use App\Controller\Home;
@@ -47,7 +50,8 @@ return [
             NewComments::class => NewCommentsFactory::class,
             ConfirmComment::class => ConfirmCommentFactory::class,
             DeleteComment::class => DeleteCommentFactory::class,
-            DeleteNews::class=>DeleteCommentFactory::class,
-            EditNews::class=> EditNewsController::class,
+            DeleteNews::class => DeleteNewsFactory::class,
+            EditNews::class => EditNewsFactory::class,
+            AddComment::class => AddCommentFactory::class,
         ]
     ] + $routes;

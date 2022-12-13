@@ -7,8 +7,7 @@
 </head>
 
 <body>
-<?php startblock('title') ?>
-<?php endblock() ?>
+
 The content of the document......
 <div class="header">
     <h2>Blog Name</h2>

@@ -20,8 +20,14 @@ class FullNews implements ControllerInterface
     public function handle()
     {
         $id = $_GET['id'];
-        $output = $this->dbService->fullNews($id);
+        $fullnews = $this->dbService->fullNews($id);
+        $newsComments = $this->dbService->newsRelatedComments($id);
 
-        return $this->templateRenderer->render('fullNews.php', $output);
+        $viewVariable = [
+            'fullnews' => $fullnews,
+            'newsComments' => $newsComments,
+        ];
+
+        return $this->templateRenderer->render('fullNews.php', $viewVariable);
     }
 }

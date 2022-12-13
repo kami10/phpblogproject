@@ -3,7 +3,6 @@
 <head>
     <title>Title of the document</title>
     <link rel="stylesheet" href="/assets/css/style.css">
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
@@ -319,7 +318,7 @@
 </div>
 
 <div class="container-xl">
-    {{ msg }}
+<!--   --><?php //var_dump($output);die; ?>
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -351,7 +350,7 @@
                     <th>ShortNews</th>
                     <th>LongNews</th>
                     <th>Action</th>
-                    <th>Actions</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -363,20 +362,12 @@
 								<label for="checkbox1"></label>
 							</span>
                         </td>
-                        <td><?php echo $viewVariable['nid'] ?></td>
-                        <td><?php echo $viewVariable['title'] ?></td>
-                        <td><?php echo $viewVariable['short_news'] ?></td>
-                        <td><?php echo $viewVariable['long_news'] ?></td>
-                        <td><a href="editnews?id= <?= $viewVariable['nid'] ?>">Edit</a></td>
-                        <td><a href="deletenews?id= <?= $viewVariable['nid'] ?>">Delete</a></td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                             data-toggle="tooltip"
-                                                                                             title="Edit">&#xE254;</i></a>
-                            <a href="/delete/{{ item.id }}" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                                  data-toggle="tooltip"
-                                                                                                  title="Delete">&#xE872;</i></a>
-                        </td>
+                        <td><?php echo $value['nid'] ?></td>
+                        <td><?php echo $value['title'] ?></td>
+                        <td><?php echo $value['short_news'] ?></td>
+                        <td><?php echo $value['long_news'] ?></td>
+                        <td><a href="editnews?id= <?= $value['nid'] ?>">Edit</a></td>
+                        <td><a href="deletenews?id= <?= $value['nid'] ?>">Delete</a></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

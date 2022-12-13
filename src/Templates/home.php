@@ -6,35 +6,33 @@
 </head>
 
 <body>
-<div class="header">
-    <h2>Blog Name</h2>
-</div>
+<?php include __DIR__ . '/header.php' ?>
 
 <div class="row">
     <div class="leftcolumn">
-        <?php foreach ($viewVariable as $item => $value): ?>
+        <?php foreach ($viewVariable as $item => $news): ?>
             <div class="card">
                 <h2>
                     <?php
-                    echo $viewVariable['title'];
+                    echo $news['title'];
                     ?>
                 </h2>
                 <h5>
                     <?php
-                    echo $viewVariable['date'];
+                    echo $news['created'];
                     ?>
                 </h5>
                 <div class="fakeimg" style="height:200px;">
-                    <?php
-                    echo $viewVariable['image'];
-                    ?>
+
+                    <img src="<?= $news['image'] ?>" alt="nis nagard" style="height: 90%;"/>
+
                 </div>
                 <p>
                     <?php
-                    echo $viewVariable['short_news'];
+                    echo $news['short_news'];
                     ?>
                 </p>
-               <a href="fullnews?id=<?= $viewVariable['nid'] ?>" > Read more </a>
+                <a href="fullnews?id=<?= $news['nid'] ?>"> Read more </a>
             </div>
         <?php endforeach; ?>
     </div>

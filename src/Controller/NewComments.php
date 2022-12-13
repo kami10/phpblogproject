@@ -20,7 +20,9 @@ class NewComments implements ControllerInterface
     public function handle()
     {
         $output = $this->dbService->newComments();
-        $viewVariable = $output;
+        $viewVariable = [
+            'output' => $output,
+        ];
 
         return $this->templateRenderer->render('newComments.php', $viewVariable);
     }

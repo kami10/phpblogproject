@@ -26,9 +26,9 @@ class DbService
         return $this->dbConnection->fullNews($id);
     }
 
-    public function addNews(int $nid, string $title, string $date, string $image, string $shortNews, string $longNews)
+    public function addNews(string $title, string $created, string $image, string $shortNews, string $longNews)
     {
-        return $this->dbConnection->addNews($nid, $title, $date, $image, $shortNews, $longNews);
+        return $this->dbConnection->addNews($title, $created, $image, $shortNews, $longNews);
     }
 
     public function newComments()
@@ -41,13 +41,33 @@ class DbService
         return $this->dbConnection->deleteComment($id);
     }
 
+    public function selectOneNews(int $id)
+    {
+        return $this->dbConnection->selectOneNews($id);
+    }
+
     public function updateComment(int $id)
     {
-        $this->dbConnection->updateComment($id);
+        return $this->dbConnection->updateComment($id);
     }
 
     public function deleteNews(int $id)
     {
-        return $this->dbConnection->deleteNews($id);
+        $this->dbConnection->deleteNews($id);
+    }
+
+    public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews)
+    {
+        $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews);
+    }
+
+    public function newsRelatedComments(int $nid)
+    {
+        return $this->dbConnection->newsRelatedComments($nid);
+    }
+
+    public function addComment(int $nid, string $comment)
+    {
+        $this->dbConnection->addComment($nid, $comment);
     }
 }

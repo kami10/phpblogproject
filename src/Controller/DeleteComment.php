@@ -22,13 +22,13 @@ class DeleteComment implements ControllerInterface
         $id = $_GET['id'];
         $output = $this->dbService->deleteComment($id);
 
-        $result = $this->dbService->newComments();
-        $viewVariable = [
-            'msg' => $output,
-            $result,
-        ];
+//        $result = $this->dbService->newComments();
+//        $viewVariable = [
+//            'msg' => $output,
+//            'result' => $result,
+//        ];
 
-        return header('newcomments', $viewVariable);
+        return header('location:newcomments?msg=Successfully deleted.');
         // return $this->templateRenderer->render();
     }
 }

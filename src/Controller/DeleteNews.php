@@ -21,12 +21,7 @@ class DeleteNews implements ControllerInterface
     {
         $id = $_GET['id'];
         $output = $this->dbService->deleteNews($id);
-        $result = $this->dbService->addNews();
-        $viewVariable = [
-            'msg' => $output,
-            $result,
-        ];
 
-        return header('admin', $viewVariable);
+        header('location:admin?msg=successfully deleted.');
     }
 }

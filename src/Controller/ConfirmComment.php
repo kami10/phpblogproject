@@ -22,13 +22,6 @@ class ConfirmComment implements ControllerInterface
         $id = $_GET['id'];
         $output = $this->dbService->updateComment($id);
 
-        $result = $this->dbService->newComments();
-
-        $viewVariable = [
-            'msg' => $output,
-            $result,
-        ];
-
-       return header('newcomments', $viewVariable);
+       header('location:newcomments?msg=confirmed');
     }
 }
