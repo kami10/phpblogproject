@@ -28,5 +28,10 @@
         </table>
     </div>
 </div>
+<br/>
+<br/>
+<a href="admin">
+    <button>Back to admin page</button>
+</a>
 </body>
 </html>

@@ -11,6 +11,7 @@ use App\Controller\FullNews;
 use App\Controller\Home;
 use App\Controller\Login;
 use App\Controller\NewComments;
+use App\Controller\UpdateNews;
 use App\Middleware\AuthenticationMiddleware;
 
 return [
@@ -29,5 +30,6 @@ return [
         'deletenews' => DeleteNews::class,
         'editnews' => EditNews::class,
         'addcomment' => AddComment::class,
+        'updatenews'=> UpdateNews::class,
     ]
 ];

@@ -318,7 +318,7 @@
 </div>
 
 <div class="container-xl">
-<!--   --><?php //var_dump($output);die; ?>
+    <!--   --><?php //var_dump($output);die; ?>
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -347,6 +347,7 @@
                     </th>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Image</th>
                     <th>ShortNews</th>
                     <th>LongNews</th>
                     <th>Action</th>
@@ -364,6 +365,7 @@
                         </td>
                         <td><?php echo $value['nid'] ?></td>
                         <td><?php echo $value['title'] ?></td>
+                        <td><img src="<?= $value['image'] ?>" alt="nis nagard" style="height: 60px; width: 80px;"/></td>
                         <td><?php echo $value['short_news'] ?></td>
                         <td><?php echo $value['long_news'] ?></td>
                         <td><a href="editnews?id= <?= $value['nid'] ?>">Edit</a></td>

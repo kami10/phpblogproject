@@ -22,6 +22,8 @@ use App\Controller\Login;
 use App\Controller\LoginFactory;
 use App\Controller\NewComments;
 use App\Controller\NewCommentsFactory;
+use App\Controller\UpdateNews;
+use App\Controller\UpdateNewsFactory;
 use App\Middleware\AuthenticationMiddleware;
 use App\Middleware\AuthenticationMiddlewareFactory;
 use App\Services\DbService;
@@ -53,5 +55,6 @@ return [
             DeleteNews::class => DeleteNewsFactory::class,
             EditNews::class => EditNewsFactory::class,
             AddComment::class => AddCommentFactory::class,
+            UpdateNews::class => UpdateNewsFactory::class,
         ]
     ] + $routes;

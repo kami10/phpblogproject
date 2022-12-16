@@ -19,24 +19,16 @@ class EditNews implements ControllerInterface
 
     public function handle()
     {
-        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-            $nid = $_REQUEST['nid'];
-            $title = $_REQUEST['title'];
-            $created = $_REQUEST['date'];
-            $image = $_FILES['image'];
-            $filename = '/assets/img/' . md5((string)time()) . '.jpg';
-            move_uploaded_file($image['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $filename);
-            $shortNews = $_REQUEST['shortNews'];
-            $longNews = $_REQUEST['longNews'];
+        $viewVariable = [
+            'output' => [],
+        ];
 
-            $output = $this->dbService->updateNews($nid, $title, $created, $filename, $shortNews, $longNews);
-            var_dump($output);die;
-        }
+            $id = $_GET['id'];
+            $output = $this->dbService->selectOneNews($id);
+            if($output){
+                $viewVariable['output'] = $output;
+            }
 
-        $id = $_GET['id'];
-        $news = $this->dbService->selectOneNews($id);
-
-
-        return $this->templateRenderer->render('editNews.php', $news);
+        return $this->templateRenderer->render('editNews.php', $viewVariable);
     }
 }

@@ -220,15 +220,11 @@ class DbConnection
             $conn = new PDO("mysql:host=$servername;dbname=phpblog_db", $username, $password);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $sql = "UPDATE news_tbl SET title=$this,created = $created, image=$image,short_news=$shortNews,long_news=$longNews WHERE nid='$nid'";
-
+            $sql = "UPDATE news_tbl SET title='$title',created = '$created', image='$image',short_news='$shortNews',long_news='$longNews' WHERE nid='$nid'";
             // Prepare statement
             $stmt = $conn->prepare($sql);
-
             // execute the query
             $stmt->execute();
-
             // echo a message to say the UPDATE succeeded
             echo $stmt->rowCount() . " records UPDATED successfully";
         } catch (PDOException $e) {
