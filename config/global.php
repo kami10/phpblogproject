@@ -26,6 +26,8 @@ use App\Controller\UpdateNews;
 use App\Controller\UpdateNewsFactory;
 use App\Middleware\AuthenticationMiddleware;
 use App\Middleware\AuthenticationMiddlewareFactory;
+use App\Services\DbConnection;
+use App\Services\DbConnectionFactory;
 use App\Services\DbService;
 use App\Services\DbServiceFactory;
 use App\Services\TemplateRenderer;
@@ -56,5 +58,12 @@ return [
             EditNews::class => EditNewsFactory::class,
             AddComment::class => AddCommentFactory::class,
             UpdateNews::class => UpdateNewsFactory::class,
-        ]
+            DbConnection::class => DbConnectionFactory::class,
+        ],
+        'database' => [
+            'host' => 'localhost',
+            'username' => 'root',
+            'password' => 'root',
+            'dbname' => 'phpblog_db'
+        ],
     ] + $routes;

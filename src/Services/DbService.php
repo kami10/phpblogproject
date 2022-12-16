@@ -70,4 +70,14 @@ class DbService
     {
         $this->dbConnection->addComment($nid, $comment);
     }
+
+    public function newsCount()
+    {
+        return $this->dbConnection->newsCount();
+    }
+
+    public function latestNews(int $count)
+    {
+        return $this->dbConnection->latestNews($count);
+    }
 }

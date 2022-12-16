@@ -19,8 +19,14 @@ class Home implements ControllerInterface
 
     public function handle()
     {
+        //$newsCount = $this->dbService->newsCount()['count(nid)'];
+        $latestNews = $this->dbService->latestNews(0);
         $output = $this->dbService->allNews();
+        $viewVariable = [
+            'latestNews' => $latestNews,
+            'output' => $output,
+        ];
 
-        return $this->templateRenderer->render('home.php', $output);
+        return $this->templateRenderer->render('home.php', $viewVariable);
     }
 }
