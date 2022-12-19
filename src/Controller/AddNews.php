@@ -20,7 +20,6 @@ class AddNews implements ControllerInterface
     public function handle()
     {
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-            $nid = null;
             $title = $_REQUEST['title'];
             $created = $_REQUEST['date'];
             $image = $_FILES['image'];

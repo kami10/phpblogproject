@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Interfaces\FactoryInterface;
 use App\Services\DbService;
+use App\Services\RedisClient;
 use App\Services\TemplateRenderer;
 use App\System\ServiceManager;
 
@@ -13,7 +14,8 @@ class FullNewsController implements FactoryInterface
     {
         $template = $serviceManager->get(TemplateRenderer::class);
         $dbService = $serviceManager->get(DbService::class);
+        $redisClient = new RedisClient();
 
-        return new FullNews($template, $dbService);
+        return new FullNews($template, $dbService, $redisClient);
     }
 }

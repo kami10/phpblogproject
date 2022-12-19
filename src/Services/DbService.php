@@ -53,12 +53,12 @@ class DbService
 
     public function deleteNews(int $id)
     {
-        $this->dbConnection->deleteNews($id);
+      return $this->dbConnection->deleteNews($id);
     }
 
     public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews)
     {
-        $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews);
+       return $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews);
     }
 
     public function newsRelatedComments(int $nid)

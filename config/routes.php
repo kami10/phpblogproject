@@ -3,6 +3,7 @@
 use App\Controller\AddComment;
 use App\Controller\AddNews;
 use App\Controller\Admin;
+use App\Controller\ApiResponse;
 use App\Controller\ConfirmComment;
 use App\Controller\DeleteComment;
 use App\Controller\DeleteNews;
@@ -31,5 +32,6 @@ return [
         'editnews' => EditNews::class,
         'addcomment' => AddComment::class,
         'updatenews'=> UpdateNews::class,
+        'api' => ApiResponse::class,
     ]
 ];

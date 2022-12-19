@@ -6,6 +6,8 @@ use App\Controller\AddNews;
 use App\Controller\AddNewsFactory;
 use App\Controller\Admin;
 use App\Controller\AdminFactory;
+use App\Controller\ApiResponse;
+use App\Controller\ApiResponseFactory;
 use App\Controller\ConfirmComment;
 use App\Controller\ConfirmCommentFactory;
 use App\Controller\DeleteComment;
@@ -59,6 +61,7 @@ return [
             AddComment::class => AddCommentFactory::class,
             UpdateNews::class => UpdateNewsFactory::class,
             DbConnection::class => DbConnectionFactory::class,
+            ApiResponse::class => ApiResponseFactory::class,
         ],
         'database' => [
             'host' => 'localhost',
