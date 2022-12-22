@@ -53,12 +53,12 @@ class DbService
 
     public function deleteNews(int $id)
     {
-      return $this->dbConnection->deleteNews($id);
+        return $this->dbConnection->deleteNews($id);
     }
 
     public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews)
     {
-       return $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews);
+        return $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews);
     }
 
     public function newsRelatedComments(int $nid)
@@ -76,8 +76,23 @@ class DbService
         return $this->dbConnection->newsCount();
     }
 
-    public function latestNews(int $count)
+    public function threeLatestNews(int $count)
     {
-        return $this->dbConnection->latestNews($count);
+        return $this->dbConnection->threeLatestNews($count);
+    }
+
+    public function fiveLatestNews(int $count)
+    {
+        return $this->dbConnection->fiveLatestNews($count);
+    }
+
+    public function addNewsCategory(int $id, array $categories)
+    {
+        $this->dbConnection->addNewsCategory($id, $categories);
+    }
+
+    public function getNewsCategories(int $id)
+    {
+        return $this->dbConnection->getNewsCategories($id);
     }
 }

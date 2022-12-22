@@ -32,6 +32,8 @@ use App\Services\DbConnection;
 use App\Services\DbConnectionFactory;
 use App\Services\DbService;
 use App\Services\DbServiceFactory;
+use App\Services\Pagination;
+use App\Services\PaginationFactory;
 use App\Services\TemplateRenderer;
 use App\Services\TemplateRendererFactory;
 use App\System\App;
@@ -62,6 +64,7 @@ return [
             UpdateNews::class => UpdateNewsFactory::class,
             DbConnection::class => DbConnectionFactory::class,
             ApiResponse::class => ApiResponseFactory::class,
+            Pagination::class => PaginationFactory::class,
         ],
         'database' => [
             'host' => 'localhost',

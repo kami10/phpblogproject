@@ -8,9 +8,12 @@
 <?php //var_dump($viewVariable['output']);die; ?>
 <body>
 <?php include __DIR__ . '/header.php' ?>
+<?php //echo $viewVariable['error'] ?>
+<?php //echo $viewVariable['pages'] ?>
+<?php //echo $viewVariable['current'] ?>
 <div class="row">
     <div class="leftcolumn">
-        <?php foreach ($viewVariable['output'] as $item => $news): ?>
+        <?php foreach ($viewVariable['fiveLatestNews'] as $item => $news): ?>
             <div class="card">
                 <h2>
                     <?php
@@ -19,7 +22,7 @@
                 </h2>
                 <h5>
                     <?php
-                    echo $news['created'];
+                    echo $news['created']; echo $news['created'];
                     ?>
                 </h5>
                 <div class="fakeimg" style="height:200px;">
@@ -37,7 +40,7 @@
         <?php endforeach; ?>
     </div>
     <div class="rightcolumn">
-        <?php foreach ($viewVariable['latestNews'] as $item => $news): ?>
+        <?php foreach ($viewVariable['threeLatestNews'] as $item => $news): ?>
             <div class="card">
                 <h3>Popular Post</h3>
                 <div class="fakeimg"><?php echo $news['title'] ?></div>
@@ -47,6 +50,17 @@
                 <div class="fakeimg"><?= $news['title'] ?></div>
             </div>
         <?php endforeach; ?>
+    </div>
+</div>
+
+<div class="center">
+    <div class="pagination">
+
+        <a href="home?page="<?= $viewVariable['pages'] ?>> <?php echo $viewVariable['pages'] ?> </a>
+
+        <!--        {% for item in pages %}-->
+        <!--        <a href="/news/{{ item }}" {% if item==current %} class="active" {% endif %}>{{ item }}</a>-->
+        <!--        {% endfor %}-->
     </div>
 </div>
 <div class="footer">

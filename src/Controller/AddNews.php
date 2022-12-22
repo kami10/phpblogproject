@@ -27,8 +27,10 @@ class AddNews implements ControllerInterface
             move_uploaded_file($image['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $filename);
             $shortNews = $_REQUEST['shortNews'];
             $longNews = $_REQUEST['longNews'];
+            $categories = $_POST['categories'];
 
             $output = $this->dbService->addNews($title, $created, $filename, $shortNews, $longNews);
+            $addCategories = $this->dbService->addNewsCategory($output, $categories);
         }
 
         return $this->templateRenderer->render('addNews.html');

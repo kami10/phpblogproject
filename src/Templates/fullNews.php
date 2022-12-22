@@ -7,14 +7,22 @@
 
 <body>
 <?php include __DIR__ . '/header.php' ?>
-<?php echo $viewVariable['newsTitle']; ?>
+<?php //echo $viewVariable['newsTitle']; ?>
 <div class="row">
     <div class="card">
-        <h2>
+        <h5>Title:
+        <span>
             <?php
             echo $viewVariable['fullNews']['title'];
             ?>
-        </h2>
+        </span>
+        </h5>
+            <h5>Categories:
+            <?php foreach ($viewVariable['newsCategories'] as $item => $value) {
+                echo $value['cat'];
+            }
+            ?>
+            </h5>
         <h5>
             <?php
             echo $viewVariable['fullNews']['created'];
@@ -38,7 +46,6 @@ Comments:
 <div class="row">
     <?php foreach ($viewVariable['newsComments'] as $item => $value): ?>
         <div class="card">
-            <div class="fakeimg" style="height:200px;">
                 <h3><?= $value['comments'] ?></h3>
             </div>
         </div>
@@ -47,6 +54,7 @@ Comments:
 <br/>
 <div class="row">
     <h1>Add your comment</h1>
+    <div class="fakeimg" style="height:200px;">
     <form action="addcomment" method="post">
         <input type="hidden" name="nid" value="<?= $viewVariable['fullNews']['nid'] ?>">
         Name: <input type="text" name="name"><br/><br/>
