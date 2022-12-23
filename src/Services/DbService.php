@@ -95,4 +95,13 @@ class DbService
     {
         return $this->dbConnection->getNewsCategories($id);
     }
+
+    public function addSetting(string $option, string $input)
+    {
+        $this->dbConnection->addSetting($option, $input);
+    }
+
+    public function getSettingTemplate(){
+        return $this->dbConnection->getSettingTemplate();
+    }
 }

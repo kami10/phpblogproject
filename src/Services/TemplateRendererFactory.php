@@ -10,6 +10,6 @@ class TemplateRendererFactory implements FactoryInterface
 
     public function __invoke(ServiceManager $serviceManager)
     {
-        return new TemplateRenderer();
+        return new TemplateRenderer($serviceManager->get(DbService::class));
     }
 }

@@ -11,6 +11,7 @@
 <?php //echo $viewVariable['error'] ?>
 <?php //echo $viewVariable['pages'] ?>
 <?php //echo $viewVariable['current'] ?>
+<?php echo 'red template' ?>
 <div class="row">
     <div class="leftcolumn">
         <?php foreach ($viewVariable['fiveLatestNews'] as $item => $news): ?>
@@ -22,7 +23,8 @@
                 </h2>
                 <h5>
                     <?php
-                    echo $news['created']; echo $news['created'];
+                    echo $news['created'];
+                    echo $news['created'];
                     ?>
                 </h5>
                 <div class="fakeimg" style="height:200px;">
@@ -41,13 +43,10 @@
     </div>
     <div class="rightcolumn">
         <?php foreach ($viewVariable['threeLatestNews'] as $item => $news): ?>
+
             <div class="card">
                 <h3>Popular Post</h3>
                 <div class="fakeimg"><?php echo $news['title'] ?></div>
-                <br>
-                <div class="fakeimg"><?= $news['title'] ?></div>
-                <br>
-                <div class="fakeimg"><?= $news['title'] ?></div>
             </div>
         <?php endforeach; ?>
     </div>

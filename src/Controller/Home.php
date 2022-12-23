@@ -26,7 +26,7 @@ class Home implements ControllerInterface
         $threeLatestNews = $this->dbService->threeLatestNews(0);
 
         // outputting the last 5 news based on user's url input
-        $current = ($_GET['page']) ?: 1;
+        $current = $_GET['page'] ?? 1;
         $newsBegin = ($current - 1) * 5;
         $fiveLatestNews = $this->dbService->fiveLatestNews($newsBegin);
 

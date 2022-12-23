@@ -4,8 +4,22 @@ namespace App\Services;
 
 class TemplateRenderer
 {
-    public function render($filename, array $viewVariable=[])
+    private DbService $dbService;
+    private string $path;
+
+    public function __construct(DbService $dbService)
     {
-        include __DIR__ . '/../Templates/' . $filename;
+        $this->dbService = $dbService;
+    }
+
+    public function setPath()
+    {
+        $this->path = $this->dbService->getSettingTemplate()['inputvalue'];
+    }
+
+    public function render($filename, array $viewVariable = [])
+    {
+        $this->setPath();
+        include __DIR__ . '/../Templates/' . $this->path . "/" . $filename;
     }
 }

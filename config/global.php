@@ -10,6 +10,8 @@ use App\Controller\ApiResponse;
 use App\Controller\ApiResponseFactory;
 use App\Controller\ConfirmComment;
 use App\Controller\ConfirmCommentFactory;
+use App\Controller\Dashboard;
+use App\Controller\DashboardFactory;
 use App\Controller\DeleteComment;
 use App\Controller\DeleteCommentFactory;
 use App\Controller\DeleteNews;
@@ -65,6 +67,7 @@ return [
             DbConnection::class => DbConnectionFactory::class,
             ApiResponse::class => ApiResponseFactory::class,
             Pagination::class => PaginationFactory::class,
+            Dashboard::class=> DashboardFactory::class,
         ],
         'database' => [
             'host' => 'localhost',
