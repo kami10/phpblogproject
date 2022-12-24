@@ -15,12 +15,12 @@ class DbConnection
         $this->conn = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'], $config['username'], $config['password']);
     }
 
-    public function allNews()
+    public function allNews(int $status)
     {
         try {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "SELECT * FROM news_tbl ";
+            $sql = "SELECT * FROM news_tbl WHERE status = '$status'";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -67,13 +67,13 @@ class DbConnection
         }
     }
 
-    public function addNews(string $title, $created, string $image, string $shortNews, string $longNews)
+    public function addNews(string $title, $created, string $image, string $shortNews, string $longNews, int $status)
     {
         try {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO news_tbl (nid, title, created, image, short_news, long_news)
-                    VALUES (null, '$title', '$created', '$image', '$shortNews', '$longNews')";
+            $sql = "INSERT INTO news_tbl (nid, title, created, image, short_news, long_news, status)
+                    VALUES (null, '$title', '$created', '$image', '$shortNews', '$longNews', '$status')";
             // use exec() because no results are returned
             $this->conn->exec($sql);
             return $this->conn->lastInsertId();
@@ -172,12 +172,12 @@ class DbConnection
         }
     }
 
-    public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews)
+    public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews, int $status)
     {
         try {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE news_tbl SET title='$title',created = '$created', image='$image',short_news='$shortNews',long_news='$longNews' WHERE nid='$nid'";
+            $sql = "UPDATE news_tbl SET title='$title',created = '$created', image='$image',short_news='$shortNews',long_news='$longNews', status='$status' WHERE nid='$nid'";
             // Prepare statement
             $stmt = $this->conn->prepare($sql);
             // execute the query
@@ -245,7 +245,7 @@ class DbConnection
         try {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "SELECT * FROM news_tbl order by nid desc limit $count,3";
+            $sql = "SELECT * FROM news_tbl WHERE status = 1  order by nid desc limit $count,3";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -265,7 +265,7 @@ class DbConnection
         try {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "SELECT * FROM news_tbl order by nid desc limit $count,5";
+            $sql = "SELECT * FROM news_tbl WHERE status=1 order by nid desc limit $count,5";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -324,7 +324,7 @@ class DbConnection
         try {
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-           $sql = "UPDATE tbl_setting SET template_option ='$option',inputvalue ='$input' WHERE id='1'";
+            $sql = "UPDATE tbl_setting SET template_option ='$option',inputvalue ='$input' WHERE id='1'";
             // Prepare statement
             $stmt = $this->conn->prepare($sql);
             // execute the query

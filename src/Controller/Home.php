@@ -34,15 +34,12 @@ class Home implements ControllerInterface
         $totalItems = current($this->pagination->newsCount());
         $itemCountPerPage = 5;
         $totalPageCount = (int)ceil(((int)$totalItems / $itemCountPerPage));
-        $pages = $this->pagination->getAllPages($current, $totalPageCount);
-        $nextPage = (($current < $totalPageCount) ? $current + 1 : $totalPageCount);
-        $previousPage = (($current > 1) ? $current - 1 : 1);
 
         $viewVariable = [
             'error' => 'no more news found',
             'threeLatestNews' => $threeLatestNews,
             'fiveLatestNews' => $fiveLatestNews,
-            'pages' => $pages,
+            'totalPageCount' => $totalPageCount,
             'current' => $current
         ];
 

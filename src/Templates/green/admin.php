@@ -313,8 +313,9 @@
 </head>
 
 <body>
-<div class="header">
-    <h2>Blog Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    <div class="col-sm-3">
+<div class="header" style="background-color: greenyellow">
+    <h2>Blog Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="col-sm-3">
             <a href="dashboard" class="btn btn-success">
                 <span>Dashboard</span></a>
         </div>
@@ -326,8 +327,12 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <h2>Manage <b>News</b></h2>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="draft" class="btn btn-success"><i
+                                    class="material-icons">&#xE147;</i> <span>Draft News</span></a>
                     </div>
                     <div class="col-sm-3">
                         <a href="newcomments" class="btn btn-success"><i
@@ -358,7 +363,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($viewVariable as $item => $value): ?>
+                <?php foreach ($viewVariable['fiveLatestNews'] as $item => $value): ?>
                     <tr>
                         <td>
 							<span class="custom-checkbox">
@@ -377,50 +382,25 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="center">
-                <div class="pagination">
-                    {% for item in pages %}
-                    <a href="/admin/{{ item }}" {% if item==current %} class="active" {% endif %}>{{ item }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-            {#
-            <div class="clearfix"> #}
-                {#
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                #}
-                {#
-                <ul class="pagination"> #}
-                    {#
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    #}
-                    {#
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    #}
-                    {#
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    #}
-                    {#
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    #}
-                    {#
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    #}
-                    {#
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    #}
-                    {#
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    #}
-                    {#
-                </ul>
-                #}
-                {#
-            </div>
-            #}
+        </div>
+    </div>
+    <div class="center">
+        <div class="pagination">
+            <?php
+            if ($viewVariable['current'] > 1) {
+                echo "<a href='admin?page=" . ($viewVariable['current'] - 1) . "' class='btn btn-danger'>Previous</a>";
+            }
+            for ($i = 1; $i < $viewVariable['totalPageCount']; $i++) {
+                echo "<a href='admin?page=" . $i . "' class='btn btn-success'>$i</a>";
+            }
+            if ($i > $viewVariable['current']) {
+                echo "<a href='admin?page=" . ($viewVariable['current'] + 1) . "' class='btn btn-danger'>Next</a>";
+            }
+            ?>
         </div>
     </div>
 </div>
+<br/>    <br/>
 <div class="footer">
     <h2>Footer</h2>
 </div>

@@ -11,9 +11,9 @@ class DbService
         $this->dbConnection = $dbConnection;
     }
 
-    public function allNews()
+    public function allNews(int $status)
     {
-        return $this->dbConnection->allNews();
+        return $this->dbConnection->allNews($status);
     }
 
     public function checkLogin()
@@ -26,9 +26,9 @@ class DbService
         return $this->dbConnection->fullNews($id);
     }
 
-    public function addNews(string $title, string $created, string $image, string $shortNews, string $longNews)
+    public function addNews(string $title, string $created, string $image, string $shortNews, string $longNews, int $status)
     {
-        return $this->dbConnection->addNews($title, $created, $image, $shortNews, $longNews);
+        return $this->dbConnection->addNews($title, $created, $image, $shortNews, $longNews, $status);
     }
 
     public function newComments()
@@ -56,9 +56,9 @@ class DbService
         return $this->dbConnection->deleteNews($id);
     }
 
-    public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews)
+    public function updateNews(int $nid, string $title, $created, string $image, string $shortNews, string $longNews, int $status)
     {
-        return $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews);
+        return $this->dbConnection->updateNews($nid, $title, $created, $image, $shortNews, $longNews, $status);
     }
 
     public function newsRelatedComments(int $nid)
@@ -101,7 +101,8 @@ class DbService
         $this->dbConnection->addSetting($option, $input);
     }
 
-    public function getSettingTemplate(){
+    public function getSettingTemplate()
+    {
         return $this->dbConnection->getSettingTemplate();
     }
 }

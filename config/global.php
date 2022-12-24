@@ -16,6 +16,8 @@ use App\Controller\DeleteComment;
 use App\Controller\DeleteCommentFactory;
 use App\Controller\DeleteNews;
 use App\Controller\DeleteNewsFactory;
+use App\Controller\Draft;
+use App\Controller\DraftFactory;
 use App\Controller\EditNews;
 use App\Controller\EditNewsFactory;
 use App\Controller\FullNews;
@@ -67,7 +69,8 @@ return [
             DbConnection::class => DbConnectionFactory::class,
             ApiResponse::class => ApiResponseFactory::class,
             Pagination::class => PaginationFactory::class,
-            Dashboard::class=> DashboardFactory::class,
+            Dashboard::class => DashboardFactory::class,
+            Draft::class => DraftFactory::class,
         ],
         'database' => [
             'host' => 'localhost',

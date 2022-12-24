@@ -22,7 +22,7 @@ class ApiResponse implements ControllerInterface
             if ($id) {
                 return json_encode($this->dbService->selectOneNews($id));
             } else {
-                return json_encode($this->dbService->allNews());
+                return json_encode($this->dbService->allNews(1));
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $request = json_decode(file_get_contents("php://input"), true);

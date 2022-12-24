@@ -29,7 +29,8 @@
     <label>Long News</label>
     <input type="textarea" name="longNews" value="<?= $viewVariable['output']['long_news'] ?>">
     <br/> <br/>
-    <input type="submit" value="Update"/>
+    <input type="submit" name="action" value="Publish" />
+    <input type="submit" name="action" value="Save Draft" />
 </form>
 <br/>
 <a href="admin">

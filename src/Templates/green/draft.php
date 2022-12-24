@@ -313,12 +313,8 @@
 </head>
 
 <body>
-<div class="header" style="background-color: red">
-    <h2>Blog Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="col-sm-3">
-            <a href="dashboard" class="btn btn-success">
-                <span>Dashboard</span></a>
-        </div>
+<div class="header" style="background-color: greenyellow">
+    <h2>Blog Name</h2>
 </div>
 
 <div class="container-xl">
@@ -327,20 +323,8 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <h2>Manage <b>News</b></h2>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="draft" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Draft News</span></a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="newcomments" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>New Comments</span></a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="addnews" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Add News</span></a>
+                    <div class="col-sm-6">
+                        <h2>Manage <b>Drafts</b></h2>
                     </div>
                 </div>
             </div>
@@ -363,7 +347,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($viewVariable['fiveLatestNews'] as $item => $value): ?>
+                <?php foreach ($viewVariable['output'] as $item => $value): ?>
                     <tr>
                         <td>
 							<span class="custom-checkbox">
@@ -384,23 +368,8 @@
             </table>
         </div>
     </div>
-    <div class="center">
-        <div class="pagination">
-            <?php
-            if ($viewVariable['current'] > 1) {
-                echo "<a href='admin?page=" . ($viewVariable['current'] - 1) . "' class='btn btn-danger'>Previous</a>";
-            }
-            for ($i = 1; $i < $viewVariable['totalPageCount']; $i++) {
-                echo "<a href='admin?page=" . $i . "' class='btn btn-success'>$i</a>";
-            }
-            if ($i > $viewVariable['current']) {
-                echo "<a href='admin?page=" . ($viewVariable['current'] + 1) . "' class='btn btn-danger'>Next</a>";
-            }
-            ?>
-        </div>
-    </div>
 </div>
-<br/>    <br/>
+<br/> <br/>
 <div class="footer">
     <h2>Footer</h2>
 </div>

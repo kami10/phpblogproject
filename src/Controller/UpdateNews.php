@@ -28,8 +28,13 @@ class UpdateNews implements ControllerInterface
             move_uploaded_file($image['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $filename);
             $shortNews = $_REQUEST['shortNews'];
             $longNews = $_REQUEST['longNews'];
+            if ($_POST['action'] === 'Publish') {
+                $status = 1;
+            } elseif ($_POST['action'] === 'Save Draft') {
+                $status = 0;
+            }
 
-            $output = $this->dbService->updateNews($nid, $title, $created, $filename, $shortNews, $longNews);
+            $output = $this->dbService->updateNews($nid, $title, $created, $filename, $shortNews, $longNews, $status);
         }
 
         return $this->templateRenderer->render('updateNews.html');

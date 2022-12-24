@@ -28,8 +28,13 @@ class AddNews implements ControllerInterface
             $shortNews = $_REQUEST['shortNews'];
             $longNews = $_REQUEST['longNews'];
             $categories = $_POST['categories'];
+            if ($_POST['action'] === 'Publish') {
+                $status = 1;
+            } elseif ($_POST['action'] === 'Save Draft') {
+                $status = 0;
+            }
 
-            $output = $this->dbService->addNews($title, $created, $filename, $shortNews, $longNews);
+            $output = $this->dbService->addNews($title, $created, $filename, $shortNews, $longNews, $status);
             $addCategories = $this->dbService->addNewsCategory($output, $categories);
         }
 

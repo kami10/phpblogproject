@@ -3,15 +3,16 @@
 <head>
     <title>Title of the document</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="style" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">-->
 </head>
-<?php //var_dump($viewVariable['latestNews']);die; ?>
-<?php //var_dump($viewVariable['output']);die; ?>
 <body>
 <?php include __DIR__ . '/header.php' ?>
-<?php //echo $viewVariable['error'] ?>
-<?php //echo $viewVariable['pages'] ?>
-<?php //echo $viewVariable['current'] ?>
-<?php echo 'green template' ?>
+<?php echo ' <h1 style="color: forestgreen;background-color: greenyellow">Green template</h1>' ?>
 <div class="row">
     <div class="leftcolumn">
         <?php foreach ($viewVariable['fiveLatestNews'] as $item => $news): ?>
@@ -42,24 +43,29 @@
         <?php endforeach; ?>
     </div>
     <div class="rightcolumn">
-        <?php foreach ($viewVariable['threeLatestNews'] as $item => $news): ?>
-
-            <div class="card">
-                <h3>Popular Post</h3>
+        <div class="card">
+            <h3>Popular Post</h3>
+            <?php foreach ($viewVariable['threeLatestNews'] as $item => $news): ?>
+                <br/>
                 <div class="fakeimg"><?php echo $news['title'] ?></div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
-
+<br/><br/>
 <div class="center">
     <div class="pagination">
-
-        <a href="home?page="<?= $viewVariable['pages'] ?>> <?php echo $viewVariable['pages'] ?> </a>
-
-        <!--        {% for item in pages %}-->
-        <!--        <a href="/news/{{ item }}" {% if item==current %} class="active" {% endif %}>{{ item }}</a>-->
-        <!--        {% endfor %}-->
+        <?php
+        if ($viewVariable['current'] > 1) {
+            echo "<a href='home?page=" . ($viewVariable['current'] - 1) . "' class='btn btn-danger'>Previous</a>";
+        }
+        for ($i = 1; $i < $viewVariable['totalPageCount']; $i++) {
+            echo "<a href='home?page=" . $i . "' class='btn btn-success'>$i</a>";
+        }
+        if ($i > $viewVariable['current']) {
+            echo "<a href='home?page=" . ($viewVariable['current'] + 1) . "' class='btn btn-danger'>Next</a>";
+        }
+        ?>
     </div>
 </div>
 <div class="footer">

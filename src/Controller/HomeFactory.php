@@ -14,9 +14,9 @@ class HomeFactory implements FactoryInterface
     public function __invoke(ServiceManager $serviceManager)
     {
         $dbService = $serviceManager->get(DbService::class);
-        $templateRendere = $serviceManager->get(TemplateRenderer::class);
+        $templateRenderer = $serviceManager->get(TemplateRenderer::class);
         $pagination = $serviceManager->get(Pagination::class);
 
-        return new Home($templateRendere, $dbService, $pagination);
+        return new Home($templateRenderer, $dbService, $pagination);
     }
 }

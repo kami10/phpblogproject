@@ -8,6 +8,7 @@ use App\Controller\ConfirmComment;
 use App\Controller\Dashboard;
 use App\Controller\DeleteComment;
 use App\Controller\DeleteNews;
+use App\Controller\Draft;
 use App\Controller\EditNews;
 use App\Controller\FullNews;
 use App\Controller\Home;
@@ -35,5 +36,6 @@ return [
         'updatenews'=> UpdateNews::class,
         'api' => ApiResponse::class,
         'dashboard'=> Dashboard::class,
+        'draft' => Draft::class,
     ]
 ];
