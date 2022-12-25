@@ -11,18 +11,18 @@
 <div class="row">
     <div class="card">
         <h5>Title:
-        <span>
+            <span>
             <?php
             echo $viewVariable['fullNews']['title'];
             ?>
         </span>
         </h5>
-            <h5>Categories:
+        <h5>Categories:
             <?php foreach ($viewVariable['newsCategories'] as $item => $value) {
                 echo $value['cat'];
             }
             ?>
-            </h5>
+        </h5>
         <h5>
             <?php
             echo $viewVariable['fullNews']['created'];
@@ -41,29 +41,29 @@
     </div>
 </div>
 <br/>
-Comments:
+<h1>Comments:</h1>
 <br/>
 <div class="row">
     <?php foreach ($viewVariable['newsComments'] as $item => $value): ?>
-        <div class="card">
-                <h3><?= $value['comments'] ?></h3>
-            </div>
-        </div>
-    <?php endforeach; ?>
+    <div class="card">
+        <h3><?= $value['comments'] ?></h3>
+    </div>
+</div>
+<?php endforeach; ?>
 </div>
 <br/>
 <div class="row">
     <h1>Add your comment</h1>
     <div class="fakeimg" style="height:200px;">
-    <form action="addcomment" method="post">
-        <input type="hidden" name="nid" value="<?= $viewVariable['fullNews']['nid'] ?>">
-        Name: <input type="text" name="name"><br/><br/>
-        Comment: <textarea name="comment"></textarea><br/><br>
-        <input type="submit">
-    </form>
-</div>
-<div class="footer">
-    <h2>Footer</h2>
-</div>
+        <form action="addcomment" method="post">
+            <input type="hidden" name="nid" value="<?= $viewVariable['fullNews']['nid'] ?>">
+            Name: <input type="text" name="name"><br/><br/>
+            Comment: <textarea name="comment"></textarea><br/><br>
+            <input type="submit">
+        </form>
+    </div>
+    <div class="footer">
+        <h2>Footer</h2>
+    </div>
 </body>
 </html>

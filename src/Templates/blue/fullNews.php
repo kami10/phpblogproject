@@ -41,7 +41,7 @@
     </div>
 </div>
 <br/>
-Comments:
+<h1>Comments:</h1>
 <br/>
 <div class="row">
     <?php foreach ($viewVariable['newsComments'] as $item => $value): ?>
@@ -55,7 +55,7 @@ Comments:
 <div class="row">
     <h1>Add your comment</h1>
     <div class="fakeimg" style="height:200px;">
-    <form action="addcomment" method="post">
+    <form action="fullnews" method="post">
         <input type="hidden" name="nid" value="<?= $viewVariable['fullNews']['nid'] ?>">
         Name: <input type="text" name="name"><br/><br/>
         Comment: <textarea name="comment"></textarea><br/><br>

@@ -22,8 +22,20 @@ class FullNews implements ControllerInterface
 
     public function handle()
     {
-        $id = $_GET['id'] ?? '';
-        // $cachedEntry = $this->redisClient->get('title');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nid = $_REQUEST['nid'];
+            $name = $_REQUEST['name'];
+            $comment = $_REQUEST['comment'];
+
+            $output = $this->dbService->addComment($nid, $comment);
+
+            //$id = $_GET['id'] ?? '';
+            $fullNews = $this->dbService->fullNews($nid);
+            $newsComments = $this->dbService->newsRelatedComments($nid);
+            $newsCategories = $this->dbService->getNewsCategories($nid);
+        } else {
+            $id = $_GET['id'] ?? '';
+            // $cachedEntry = $this->redisClient->get('title');
 
 //        if ($cachedEntry) {
 //            //display redis key's value from cache not db, fetch whole news data from db,time checking for returning data
@@ -32,7 +44,7 @@ class FullNews implements ControllerInterface
 //            $newsTitle = 'From Redis: ' . $cachedEntry;
 //            $t2 = microtime(true) * 1000;
 //            echo 'time taken from cache: ' . round($t2 - $t1, 4);
-        $fullNews = $this->dbService->fullNews($id);
+            $fullNews = $this->dbService->fullNews($id);
 //        } else {
 //            //fetch data from db, cache title's value into Redis, put expiration time for redis key,read key's value from redis
 //            $t1 = microtime(true) * 1000;
@@ -45,9 +57,9 @@ class FullNews implements ControllerInterface
 //            $newsTitle = 'From DB: ' . $cachedEntry;
 //        }
 
-        $newsComments = $this->dbService->newsRelatedComments($id);
-        $newsCategories = $this->dbService->getNewsCategories($id);
-
+            $newsComments = $this->dbService->newsRelatedComments($id);
+            $newsCategories = $this->dbService->getNewsCategories($id);
+        }
         $viewVariable = [
             'fullNews' => $fullNews ?? [],
             'newsTitle' => $newsTitle ?? '',

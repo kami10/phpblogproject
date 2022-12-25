@@ -64,7 +64,6 @@ return [
             DeleteComment::class => DeleteCommentFactory::class,
             DeleteNews::class => DeleteNewsFactory::class,
             EditNews::class => EditNewsFactory::class,
-            AddComment::class => AddCommentFactory::class,
             UpdateNews::class => UpdateNewsFactory::class,
             DbConnection::class => DbConnectionFactory::class,
             ApiResponse::class => ApiResponseFactory::class,

@@ -32,7 +32,6 @@ return [
         'confirmcomment' => ConfirmComment::class,
         'deletenews' => DeleteNews::class,
         'editnews' => EditNews::class,
-        'addcomment' => AddComment::class,
         'updatenews'=> UpdateNews::class,
         'api' => ApiResponse::class,
         'dashboard'=> Dashboard::class,

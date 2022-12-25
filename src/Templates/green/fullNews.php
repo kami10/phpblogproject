@@ -41,7 +41,7 @@
     </div>
 </div>
 <br/>
-Comments:
+<h1>Comments:</h1>
 <br/>
 <div class="row">
     <?php foreach ($viewVariable['newsComments'] as $item => $value): ?>
