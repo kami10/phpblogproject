@@ -375,7 +375,7 @@
                         <td><?php echo $value['title'] ?></td>
                         <td><img src="<?= $value['image'] ?>" alt="nis nagard" style="height: 60px; width: 80px;"/></td>
                         <td><?php echo $value['short_news'] ?></td>
-                        <td><?php echo $value['long_news'] ?></td>
+                        <td><?php echo htmlspecialchars_decode($value['long_news']) ?></td>
                         <td><a href="editnews?id= <?= $value['nid'] ?>">Edit</a></td>
                         <td><a href="deletenews?id= <?= $value['nid'] ?>">Delete</a></td>
                     </tr>

@@ -25,7 +25,7 @@
             </h5>
         <h5>
             <?php
-            echo $viewVariable['fullNews']['created'];
+            echo htmlspecialchars_decode($viewVariable['fullNews']['created']);
             ?>
         </h5>
         <div class="fakeimg" style="height:200px;">

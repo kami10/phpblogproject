@@ -20,12 +20,22 @@ class Admin implements ControllerInterface
         $this->pagination = $pagination;
     }
 
+    public function modify(array $news)
+    {
+        foreach ($news as &$value) {
+            $value['long_news'] = htmlspecialchars_decode($value['long_news']);
+        }
+        return $news;
+    }
+
     public function handle()
     {
         // outputting the last 5 news based on user's url input
         $current = $_GET['page'] ?? 1;
         $newsBegin = ($current - 1) * 5;
         $fiveLatestNews = $this->dbService->fiveLatestNews($newsBegin);
+        $modifiedArray = $this->modify($fiveLatestNews);
+
 
         //Pagination
         $totalItems = current($this->pagination->newsCount());
@@ -34,7 +44,7 @@ class Admin implements ControllerInterface
 
         $viewVariable = [
             'error' => 'no more news found',
-            'fiveLatestNews' => $fiveLatestNews,
+            'fiveLatestNews' => $modifiedArray,
             'totalPageCount' => $totalPageCount,
             'current' => $current
         ];

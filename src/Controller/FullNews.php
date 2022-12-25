@@ -20,17 +20,22 @@ class FullNews implements ControllerInterface
         $this->redisClient = $redisClient;
     }
 
+    public function modify(array $news)
+    {
+        $news['long_news'] = htmlspecialchars_decode($news['long_news']);
+        return $news;
+    }
+
     public function handle()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nid = $_REQUEST['nid'];
             $name = $_REQUEST['name'];
             $comment = $_REQUEST['comment'];
-
             $output = $this->dbService->addComment($nid, $comment);
 
-            //$id = $_GET['id'] ?? '';
             $fullNews = $this->dbService->fullNews($nid);
+            $modifiedArray = $this->modify($fullNews);
             $newsComments = $this->dbService->newsRelatedComments($nid);
             $newsCategories = $this->dbService->getNewsCategories($nid);
         } else {
@@ -45,6 +50,7 @@ class FullNews implements ControllerInterface
 //            $t2 = microtime(true) * 1000;
 //            echo 'time taken from cache: ' . round($t2 - $t1, 4);
             $fullNews = $this->dbService->fullNews($id);
+            $modifiedArray = $this->modify($fullNews);
 //        } else {
 //            //fetch data from db, cache title's value into Redis, put expiration time for redis key,read key's value from redis
 //            $t1 = microtime(true) * 1000;
@@ -61,7 +67,7 @@ class FullNews implements ControllerInterface
             $newsCategories = $this->dbService->getNewsCategories($id);
         }
         $viewVariable = [
-            'fullNews' => $fullNews ?? [],
+            'fullNews' => $modifiedArray ?? [],
             'newsTitle' => $newsTitle ?? '',
             'newsComments' => $newsComments ?? [],
             'newsCategories' => $newsCategories ?? [],

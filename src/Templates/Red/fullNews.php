@@ -35,7 +35,7 @@
         </div>
         <p>
             <?php
-            echo $viewVariable['fullNews']['long_news'];
+            echo htmlspecialchars_decode($viewVariable['fullNews']['long_news']);
             ?>
         </p>
     </div>

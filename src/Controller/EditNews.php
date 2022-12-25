@@ -17,17 +17,22 @@ class EditNews implements ControllerInterface
         $this->dbService = $dbService;
     }
 
+    public function modify(array $news)
+    {
+        $news['long_news'] = htmlspecialchars_decode($news['long_news']);
+        return $news;
+    }
+
     public function handle()
     {
+        $id = $_GET['id'];
+        $output = $this->dbService->selectOneNews($id);
+        $modifiedArray = $this->modify($output);
+
         $viewVariable = [
-            'output' => [],
+            'output' => $modifiedArray,
         ];
 
-            $id = $_GET['id'];
-            $output = $this->dbService->selectOneNews($id);
-            if($output){
-                $viewVariable['output'] = $output;
-            }
 
         return $this->templateRenderer->render('editNews.php', $viewVariable);
     }

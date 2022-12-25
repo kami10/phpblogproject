@@ -27,6 +27,7 @@ class AddNews implements ControllerInterface
             move_uploaded_file($image['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $filename);
             $shortNews = $_REQUEST['shortNews'];
             $longNews = $_REQUEST['longNews'];
+            $longNews = htmlspecialchars($longNews);
             $categories = $_POST['categories'];
             if ($_POST['action'] === 'Publish') {
                 $status = 1;
