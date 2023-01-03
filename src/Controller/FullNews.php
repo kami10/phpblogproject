@@ -3,21 +3,28 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
-use App\Services\DbService;
+use App\Persistence\CommentTableRepo;
+use App\Persistence\NewsCategoryRepo;
+use App\Persistence\NewsTableRepository;
 use App\Services\RedisClient;
 use App\Services\TemplateRenderer;
+use PDO;
 
 class FullNews implements ControllerInterface
 {
     private TemplateRenderer $templateRenderer;
-    private DbService $dbService;
     private RedisClient $redisClient;
+    private NewsTableRepository $newsRepo;
+    private CommentTableRepo $commentRepo;
+    private NewsCategoryRepo $newsCategoryRepo;
 
-    public function __construct(TemplateRenderer $templateRenderer, DbService $dbService, RedisClient $redisClient)
+    public function __construct(TemplateRenderer $templateRenderer, NewsTableRepository $newsRepo, CommentTableRepo $commentRepo, NewsCategoryRepo $newsCategoryRepo, RedisClient $redisClient)
     {
         $this->templateRenderer = $templateRenderer;
-        $this->dbService = $dbService;
         $this->redisClient = $redisClient;
+        $this->newsRepo = $newsRepo;
+        $this->commentRepo = $commentRepo;
+        $this->newsCategoryRepo = $newsCategoryRepo;
     }
 
     public function modify(array $news)
@@ -32,12 +39,12 @@ class FullNews implements ControllerInterface
             $nid = $_REQUEST['nid'];
             $name = $_REQUEST['name'];
             $comment = $_REQUEST['comment'];
-            $output = $this->dbService->addComment($nid, $comment);
+            $output = $this->commentRepo->addComment($nid, $comment);
 
-            $fullNews = $this->dbService->fullNews($nid);
+            $fullNews = $this->newsRepo->fullNews($nid);
             $modifiedArray = $this->modify($fullNews);
-            $newsComments = $this->dbService->newsRelatedComments($nid);
-            $newsCategories = $this->dbService->getNewsCategories($nid);
+            $newsComments = $this->commentRepo->newsRelatedComments($nid);
+            $newsCategories = $this->newsCategoryRepo->getNewsCategories($nid);
         } else {
             $id = $_GET['id'] ?? '';
             // $cachedEntry = $this->redisClient->get('title');
@@ -49,7 +56,7 @@ class FullNews implements ControllerInterface
 //            $newsTitle = 'From Redis: ' . $cachedEntry;
 //            $t2 = microtime(true) * 1000;
 //            echo 'time taken from cache: ' . round($t2 - $t1, 4);
-            $fullNews = $this->dbService->fullNews($id);
+            $fullNews = $this->newsRepo->fullNews($id);
             $modifiedArray = $this->modify($fullNews);
 //        } else {
 //            //fetch data from db, cache title's value into Redis, put expiration time for redis key,read key's value from redis
@@ -63,8 +70,8 @@ class FullNews implements ControllerInterface
 //            $newsTitle = 'From DB: ' . $cachedEntry;
 //        }
 
-            $newsComments = $this->dbService->newsRelatedComments($id);
-            $newsCategories = $this->dbService->getNewsCategories($id);
+            $newsComments = $this->commentRepo->newsRelatedComments($id);
+            $newsCategories = $this->newsCategoryRepo->getNewsCategories($id);
         }
         $viewVariable = [
             'fullNews' => $modifiedArray ?? [],

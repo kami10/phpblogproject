@@ -3,18 +3,22 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
+use App\Persistence\NewsCategoryRepo;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\TemplateRenderer;
 
 class AddNews implements ControllerInterface
 {
     private TemplateRenderer $templateRenderer;
-    private DbService $dbService;
+    private NewsTableRepository $newsRepo;
+    private NewsCategoryRepo $newsCategoryRepo;
 
-    public function __construct(TemplateRenderer $templateRenderer, DbService $dbService)
+    public function __construct(TemplateRenderer $templateRenderer, NewsTableRepository $newsRepo, NewsCategoryRepo $newsCategoryRepo)
     {
         $this->templateRenderer = $templateRenderer;
-        $this->dbService = $dbService;
+        $this->newsRepo = $newsRepo;
+        $this->newsCategoryRepo = $newsCategoryRepo;
     }
 
     public function handle()
@@ -35,10 +39,16 @@ class AddNews implements ControllerInterface
                 $status = 0;
             }
 
-            $output = $this->dbService->addNews($title, $created, $filename, $shortNews, $longNews, $status);
-            $addCategories = $this->dbService->addNewsCategory($output, $categories);
+            $output = $this->newsRepo->addNews($title, $created, $filename, $shortNews, $longNews, $status);
+            $addCategories = $this->newsCategoryRepo->addNewsCategory($output, $categories);
+        } else {
+            $categories = $this->newsCategoryRepo->getCategories();
         }
 
-        return $this->templateRenderer->render('addNews.html');
+        $viewVariable = [
+            'categories' => $categories,
+        ];
+
+        return $this->templateRenderer->render('addNews.php', $viewVariable);
     }
 }

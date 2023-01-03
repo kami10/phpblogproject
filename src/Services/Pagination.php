@@ -2,35 +2,25 @@
 
 namespace App\Services;
 
+use App\Model\PaginationResponse;
+use App\Persistence\NewsTableRepository;
+
 class Pagination
 {
-    private DbService $dbService;
+    private NewsTableRepository $newsRepo;
 
-    public function __construct(DbService $dbService)
+    public function __construct(NewsTableRepository $newsRepo)
     {
-        $this->dbService = $dbService;
+        $this->newsRepo = $newsRepo;
     }
 
     public function newsCount()
     {
-      return $this->dbService->newsCount();
+        return $this->newsRepo->newsCount();
     }
 
-    public function getAllPages(int $current, int $max)
+    public function totalNewsCount(int $pageSize): PaginationResponse
     {
-        $output = [];
-        for ($i = $current - 2; $i < $current; $i++) {
-            if ($i < 1) {
-                continue;
-            }
-            $output = $i;
-        }
-        for ($i = $current; $i < $current + 3; $i++) {
-            if ($i > $max) {
-                break;
-            }
-            $output = $i;
-        }
-        return $output;
+        return new PaginationResponse((int)ceil(((int)$this->newsCount() / $pageSize)));
     }
 }

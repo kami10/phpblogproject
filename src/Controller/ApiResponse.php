@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 
 class ApiResponse implements ControllerInterface
 {
-    private DbService $dbService;
+    private NewsTableRepository $newsRepo;
 
-    public function __construct(DbService $dbService)
+    public function __construct(NewsTableRepository $newsRepo)
     {
-        $this->dbService = $dbService;
+        $this->newsRepo = $newsRepo;
     }
 
     public function handle()
@@ -22,7 +23,7 @@ class ApiResponse implements ControllerInterface
             if ($id) {
                 return json_encode($this->dbService->selectOneNews($id));
             } else {
-                return json_encode($this->dbService->allNews(1));
+                return json_encode($this->newsRepo->allNews(1));
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $request = json_decode(file_get_contents("php://input"), true);

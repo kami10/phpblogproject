@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Interfaces\FactoryInterface;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\Pagination;
 use App\Services\TemplateRenderer;
@@ -13,10 +14,10 @@ class HomeFactory implements FactoryInterface
 
     public function __invoke(ServiceManager $serviceManager)
     {
-        $dbService = $serviceManager->get(DbService::class);
+        $newsRepo = $serviceManager->get(NewsTableRepository::class);
         $templateRenderer = $serviceManager->get(TemplateRenderer::class);
         $pagination = $serviceManager->get(Pagination::class);
 
-        return new Home($templateRenderer, $dbService, $pagination);
+        return new Home($templateRenderer, $newsRepo, $pagination);
     }
 }

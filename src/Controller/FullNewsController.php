@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Interfaces\FactoryInterface;
+use App\Persistence\CommentTableRepo;
+use App\Persistence\NewsCategoryRepo;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\RedisClient;
 use App\Services\TemplateRenderer;
@@ -13,9 +16,11 @@ class FullNewsController implements FactoryInterface
     public function __invoke(ServiceManager $serviceManager)
     {
         $template = $serviceManager->get(TemplateRenderer::class);
-        $dbService = $serviceManager->get(DbService::class);
+        $newsRepo = $serviceManager->get(NewsTableRepository::class);
+        $commentRepo = $serviceManager->get(CommentTableRepo::class);
+        $newsCategoryRepo = $serviceManager->get(NewsCategoryRepo::class);
         $redisClient = new RedisClient();
 
-        return new FullNews($template, $dbService, $redisClient);
+        return new FullNews($template, $newsRepo, $commentRepo, $newsCategoryRepo, $redisClient);
     }
 }

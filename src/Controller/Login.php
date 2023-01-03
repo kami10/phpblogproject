@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
+use App\Persistence\LoginTableRepo;
 use App\Services\DbService;
 use App\Services\TemplateRenderer;
 use App\System\ServiceManager;
@@ -10,12 +11,12 @@ use App\System\ServiceManager;
 class Login implements ControllerInterface
 {
     private TemplateRenderer $templateRenderer;
-    private DbService $dbService;
+    private LoginTableRepo $loginRepo;
 
-    public function __construct(TemplateRenderer $templateRenderer, DbService $dbService)
+    public function __construct(TemplateRenderer $templateRenderer, LoginTableRepo $loginRepo)
     {
         $this->templateRenderer = $templateRenderer;
-        $this->dbService = $dbService;
+        $this->loginRepo = $loginRepo;
     }
 
     public function handle()
@@ -23,7 +24,7 @@ class Login implements ControllerInterface
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $username = $_REQUEST['username'];
             $password = $_REQUEST['password'];
-            $db = $this->dbService->checkLogin();
+            $db = $this->loginRepo->login();
             if ($username === $db['username'] && $password === $db['password']) {
                 $_SESSION['username'] = $username;
                 header("location: " . 'admin');

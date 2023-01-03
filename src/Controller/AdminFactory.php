@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Interfaces\FactoryInterface;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\Pagination;
 use App\Services\TemplateRenderer;
@@ -13,9 +14,9 @@ class AdminFactory implements FactoryInterface
     public function __invoke(ServiceManager $serviceManager)
     {
         $template = $serviceManager->get(TemplateRenderer::class);
-        $dbService = $serviceManager->get(DbService::class);
+        $newsRepo = $serviceManager->get(NewsTableRepository::class);
         $pagination = $serviceManager->get(Pagination::class);
 
-        return new Admin($template, $dbService, $pagination);
+        return new Admin($template, $newsRepo, $pagination);
     }
 }

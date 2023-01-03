@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Interfaces\FactoryInterface;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\TemplateRenderer;
 use App\System\ServiceManager;
@@ -12,7 +13,7 @@ class LoginFactory implements FactoryInterface
     public function __invoke(ServiceManager $serviceManager)
     {
         $template = $serviceManager->get(TemplateRenderer::class);
-        $dbService = $serviceManager->get(DbService::class);
-        return new Login($template, $dbService);
+        $loginRepo = $serviceManager->get(NewsTableRepository::class);
+        return new Login($template, $loginRepo);
     }
 }

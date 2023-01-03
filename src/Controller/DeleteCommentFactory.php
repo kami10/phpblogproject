@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Interfaces\FactoryInterface;
+use App\Persistence\CommentTableRepo;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\TemplateRenderer;
 use App\System\ServiceManager;
@@ -12,9 +14,8 @@ class DeleteCommentFactory implements FactoryInterface
 
     public function __invoke(ServiceManager $serviceManager)
     {
-        $dbService = $serviceManager->get(DbService::class);
-        $template = $serviceManager->get(TemplateRenderer::class);
+        $newsRepo = $serviceManager->get(CommentTableRepo::class);
 
-        return new DeleteComment($dbService, $template);
+        return new DeleteComment($newsRepo);
     }
 }

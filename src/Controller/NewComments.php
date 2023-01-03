@@ -3,23 +3,24 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
+use App\Persistence\CommentTableRepo;
 use App\Services\DbService;
 use App\Services\TemplateRenderer;
 
 class NewComments implements ControllerInterface
 {
     private TemplateRenderer $templateRenderer;
-    private DbService $dbService;
+    private CommentTableRepo $commentRepo;
 
-    public function __construct(TemplateRenderer $templateRenderer, DbService $dbService)
+    public function __construct(TemplateRenderer $templateRenderer, CommentTableRepo $commentRepo)
     {
         $this->templateRenderer = $templateRenderer;
-        $this->dbService = $dbService;
+        $this->commentRepo = $commentRepo;
     }
 
     public function handle()
     {
-        $output = $this->dbService->newComments();
+        $output = $this->commentRepo->newComments();
         $viewVariable = [
             'output' => $output,
         ];

@@ -24,6 +24,7 @@ class ServiceManager
         $factory = new $factories[$class];
         if ($factory instanceof FactoryInterface) {
             return $factory($this);
+            var_dump('f');die;
         }
 
         throw new \Exception('Factory not found');

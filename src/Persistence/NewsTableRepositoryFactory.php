@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Services;
+namespace App\Persistence;
 
 use App\Interfaces\FactoryInterface;
 use App\System\ServiceManager;
 
-class DbServiceFactory implements FactoryInterface
+class NewsTableRepositoryFactory implements FactoryInterface
 {
+
     public function __invoke(ServiceManager $serviceManager)
     {
         $dbConnection = $serviceManager->get(DbConnection::class);
-        return new DbService($dbConnection);
+        $conn = $dbConnection->getConnection();
+        return new NewsTableRepository($conn);
     }
 }

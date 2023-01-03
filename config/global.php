@@ -28,12 +28,24 @@ use App\Controller\Login;
 use App\Controller\LoginFactory;
 use App\Controller\NewComments;
 use App\Controller\NewCommentsFactory;
+use App\Controller\SubCategories;
+use App\Controller\SubCategoriesFactory;
 use App\Controller\UpdateNews;
 use App\Controller\UpdateNewsFactory;
 use App\Middleware\AuthenticationMiddleware;
 use App\Middleware\AuthenticationMiddlewareFactory;
-use App\Services\DbConnection;
-use App\Services\DbConnectionFactory;
+use App\Persistence\CommentTableRepo;
+use App\Persistence\CommentTableRepoFactory;
+use App\Persistence\DbConnection;
+use App\Persistence\DbConnectionFactory;
+use App\Persistence\LoginTableRepo;
+use App\Persistence\LoginTableRepoFactory;
+use App\Persistence\NewsCategoryRepo;
+use App\Persistence\NewsCategoryRepoFactory;
+use App\Persistence\NewsTableRepository;
+use App\Persistence\NewsTableRepositoryFactory;
+use App\Persistence\SettingTableRepo;
+use App\Persistence\SettingTableRepoFactory;
 use App\Services\DbService;
 use App\Services\DbServiceFactory;
 use App\Services\Pagination;
@@ -70,6 +82,11 @@ return [
             Pagination::class => PaginationFactory::class,
             Dashboard::class => DashboardFactory::class,
             Draft::class => DraftFactory::class,
+            NewsTableRepository::class => NewsTableRepositoryFactory::class,
+            CommentTableRepo::class => CommentTableRepoFactory::class,
+            LoginTableRepo::class => LoginTableRepoFactory::class,
+            NewsCategoryRepo::class => NewsCategoryRepoFactory::class,
+            SettingTableRepo::class => SettingTableRepoFactory::class,
         ],
         'database' => [
             'host' => 'localhost',

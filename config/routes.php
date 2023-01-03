@@ -36,5 +36,6 @@ return [
         'api' => ApiResponse::class,
         'dashboard'=> Dashboard::class,
         'draft' => Draft::class,
+        'subcategory'=>\App\Controller\SubCategories::class,
     ]
 ];

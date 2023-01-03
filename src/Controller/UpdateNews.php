@@ -3,18 +3,19 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
+use App\Persistence\NewsTableRepository;
 use App\Services\DbService;
 use App\Services\TemplateRenderer;
 
 class UpdateNews implements ControllerInterface
 {
     private TemplateRenderer $templateRenderer;
-    private DbService $dbService;
+    private NewsTableRepository $newsRepo;
 
-    public function __construct(TemplateRenderer $templateRenderer, DbService $dbService)
+    public function __construct(TemplateRenderer $templateRenderer, NewsTableRepository $newsRepo)
     {
         $this->templateRenderer = $templateRenderer;
-        $this->dbService = $dbService;
+        $this->newsRepo = $newsRepo;
     }
 
     public function handle()
@@ -34,7 +35,7 @@ class UpdateNews implements ControllerInterface
                 $status = 0;
             }
 
-            $output = $this->dbService->updateNews($nid, $title, $created, $filename, $shortNews, $longNews, $status);
+            $output = $this->newsRepo->updateNews($nid, $title, $created, $filename, $shortNews, $longNews, $status);
         }
 
         return $this->templateRenderer->render('updateNews.html');

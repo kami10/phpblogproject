@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Persistence;
 
 use App\Interfaces\FactoryInterface;
 use App\System\ServiceManager;

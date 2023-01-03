@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\FactoryInterface;
+use App\Persistence\NewsTableRepository;
 use App\System\ServiceManager;
 
 class PaginationFactory implements FactoryInterface
@@ -10,6 +11,6 @@ class PaginationFactory implements FactoryInterface
 
     public function __invoke(ServiceManager $serviceManager)
     {
-        return new Pagination($serviceManager->get(DbService::class));
+        return new Pagination($serviceManager->get(NewsTableRepository::class));
     }
 }

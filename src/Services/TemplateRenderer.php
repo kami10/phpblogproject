@@ -2,19 +2,21 @@
 
 namespace App\Services;
 
+use App\Persistence\SettingTableRepo;
+
 class TemplateRenderer
 {
-    private DbService $dbService;
     private string $path;
+    private SettingTableRepo $settingTableRepo;
 
-    public function __construct(DbService $dbService)
+    public function __construct(SettingTableRepo $settingTableRepo)
     {
-        $this->dbService = $dbService;
+        $this->settingTableRepo = $settingTableRepo;
     }
 
     public function setPath()
     {
-        $this->path = $this->dbService->getSettingTemplate()['inputvalue'];
+        $this->path = $this->settingTableRepo->getSettingTemplate()['inputvalue'];
     }
 
     public function render($filename, array $viewVariable = [])
