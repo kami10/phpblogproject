@@ -322,7 +322,7 @@
 </div>
 
 <div class="container-xl">
-    <!--   --><?php //var_dump($output);die; ?>
+       <h1>Welcome <?php echo $viewVariable['role']; ?></h1>
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">

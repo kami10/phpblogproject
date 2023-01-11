@@ -11,6 +11,9 @@
     <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">-->
 </head>
 <body>
+<?php //$homeModelView = new \App\Model\HomeModelView();
+//var_dump($homeModelView->getFiveLatestNews());die;
+//?>
 <?php include __DIR__ . '/header.php' ?>
 <?php echo ' <h1 style="color: darkblue;background-color: cornflowerblue">Blue template</h1>' ?>
 <div class="row">
@@ -24,7 +27,6 @@
                 </h2>
                 <h5>
                     <?php
-                    echo $news['created'];
                     echo $news['created'];
                     ?>
                 </h5>
@@ -43,13 +45,13 @@
         <?php endforeach; ?>
     </div>
     <div class="rightcolumn">
-            <div class="card">
-                <h3>Popular Post</h3>
-                <?php foreach ($viewVariable['threeLatestNews'] as $item => $news): ?>
+        <div class="card">
+            <h3>Popular Post</h3>
+            <?php foreach ($viewVariable['threeLatestNews'] as $item => $news): ?>
                 <br/>
                 <div class="fakeimg"><?php echo $news['title'] ?></div>
-                <?php endforeach; ?>
-            </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
 <br/><br/>

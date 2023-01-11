@@ -72,12 +72,14 @@ class FullNews implements ControllerInterface
 
             $newsComments = $this->commentRepo->newsRelatedComments($id);
             $newsCategories = $this->newsCategoryRepo->getNewsCategories($id);
+            $newsAuthor = $this->newsRepo->getNewsAuthor($id);
         }
         $viewVariable = [
             'fullNews' => $modifiedArray ?? [],
             'newsTitle' => $newsTitle ?? '',
             'newsComments' => $newsComments ?? [],
             'newsCategories' => $newsCategories ?? [],
+            'newsAuthor' => $newsAuthor ?? [],
         ];
 
         return $this->templateRenderer->render('fullNews.php', $viewVariable);

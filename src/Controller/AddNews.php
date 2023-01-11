@@ -3,22 +3,25 @@
 namespace App\Controller;
 
 use App\Interfaces\ControllerInterface;
+use App\Persistence\LoginTableRepo;
 use App\Persistence\NewsCategoryRepo;
 use App\Persistence\NewsTableRepository;
-use App\Services\DbService;
 use App\Services\TemplateRenderer;
+use MongoDB\Driver\Session;
 
 class AddNews implements ControllerInterface
 {
     private TemplateRenderer $templateRenderer;
     private NewsTableRepository $newsRepo;
     private NewsCategoryRepo $newsCategoryRepo;
+    private LoginTableRepo $loginRepo;
 
-    public function __construct(TemplateRenderer $templateRenderer, NewsTableRepository $newsRepo, NewsCategoryRepo $newsCategoryRepo)
+    public function __construct(TemplateRenderer $templateRenderer, NewsTableRepository $newsRepo, NewsCategoryRepo $newsCategoryRepo, LoginTableRepo $loginRepo)
     {
         $this->templateRenderer = $templateRenderer;
         $this->newsRepo = $newsRepo;
         $this->newsCategoryRepo = $newsCategoryRepo;
+        $this->loginRepo = $loginRepo;
     }
 
     public function handle()
@@ -38,9 +41,10 @@ class AddNews implements ControllerInterface
             } elseif ($_POST['action'] === 'Save Draft') {
                 $status = 0;
             }
-
-            $output = $this->newsRepo->addNews($title, $created, $filename, $shortNews, $longNews, $status);
-            $addCategories = $this->newsCategoryRepo->addNewsCategory($output, $categories);
+            $id = (int)$this->loginRepo->getId($_SESSION['role']);
+            $news_id = $this->newsRepo->addNews($title, $created, $filename, $shortNews, $longNews, $status);
+            $addCategories = $this->newsCategoryRepo->addNewsCategory($news_id, $categories);
+            $addNewsAuthor = $this->newsRepo->addNewsAuthor($id, $news_id);
         } else {
             $categories = $this->newsCategoryRepo->getCategories();
         }

@@ -25,11 +25,13 @@ class Login implements ControllerInterface
             $username = $_REQUEST['username'];
             $password = $_REQUEST['password'];
             $db = $this->loginRepo->login();
-            if ($username === $db['username'] && $password === $db['password']) {
-                $_SESSION['username'] = $username;
-                header("location: " . 'admin');
-            } else {
-                echo 'login failed';
+            foreach ($db as $item => $value) {
+                if ($username === $value['username'] && $password === $value['password']) {
+                    $_SESSION['role'] = $value['role'];
+                    header("location: " . 'admin');
+                } else {
+                    echo 'login failed';
+                }
             }
         }
 

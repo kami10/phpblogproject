@@ -34,8 +34,9 @@ class UpdateNews implements ControllerInterface
             } elseif ($_POST['action'] === 'Save Draft') {
                 $status = 0;
             }
-
+            $id = (int)$this->loginRepo->getId($_SESSION['role']);
             $output = $this->newsRepo->updateNews($nid, $title, $created, $filename, $shortNews, $longNews, $status);
+            $addNewsAuthor = $this->newsRepo->addNewsAuthor($id, $nid);
         }
 
         return $this->templateRenderer->render('updateNews.html');

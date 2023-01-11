@@ -25,7 +25,6 @@
                 <h5>
                     <?php
                     echo $news['created'];
-                    echo $news['created'];
                     ?>
                 </h5>
                 <div class="fakeimg" style="height:200px;">

@@ -169,4 +169,37 @@ class NewsTableRepository
             return false;
         }
     }
+
+    public function addNewsAuthor(int $id, int $newsId)
+    {
+        try {
+            // set the PDO error mode to exception
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO news_author (author_id, news_id) VALUES ('$id', '$newsId')";
+            // use exec() because no results are returned
+            $this->conn->exec($sql);
+            return $this->conn->lastInsertId();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function getNewsAuthor(int $nid)
+    {
+        try {
+            // set the PDO error mode to exception
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "SELECT role FROM news_author INNER JOIN tbl_login  where news_id='$nid' AND author_id = tbl_login.id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $output = [];
+            foreach ($stmt->fetchAll() as $key => $value) {
+                $output[$key] = $value;
+            }
+            return $output;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

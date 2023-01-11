@@ -14,10 +14,9 @@ class HomeFactory implements FactoryInterface
 
     public function __invoke(ServiceManager $serviceManager)
     {
-        $newsRepo = $serviceManager->get(NewsTableRepository::class);
         $templateRenderer = $serviceManager->get(TemplateRenderer::class);
         $pagination = $serviceManager->get(Pagination::class);
 
-        return new Home($templateRenderer, $newsRepo, $pagination);
+        return new Home($templateRenderer, $pagination);
     }
 }
